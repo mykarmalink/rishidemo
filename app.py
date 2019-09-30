@@ -1,11 +1,19 @@
-from flask import Flask
+#!flask/bin/python
+import json
 
-app = Flask(__name__)
+from flask import Flask, Response
+
+from demo.flaskrun import flaskrun
+
+application = Flask(__name__)
 
 
-@app.route('/')
-def hello():
-    return "Hello World!"
+@application.route('/', methods=['GET'])
+def get_root():
+    return Response(json.dumps(
+        dict(Output='Hello from rishi')),
+        mimetype='application/json', status=200)
+
 
 if __name__ == '__main__':
-    app.run()
+    flaskrun(application)
